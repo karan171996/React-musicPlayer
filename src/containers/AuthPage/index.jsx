@@ -1,41 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Container } from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import background from "../../assests/background.png";
-import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
-
-const useStyles = makeStyles({
-  imageNew: {
-    backgroundImage: `url(${background})`,
-    backgroundPosition: "center",
-    backgroundSize: "contain",
-    backgroundRepeat: "no-repeat",
-    height: "90vh",
-  },
-  buttonStyle: {
-    textAlign: "center",
-  },
-});
-
-const AuthButton = withStyles((theme) => ({
-  root: {
-    borderRadius: "20px",
-    color: theme.palette.getContrastText(green[500]),
-    backgroundColor: green[500],
-    "&:hover": {
-      backgroundColor: green[700],
-    },
-  },
-}))(Button);
+import { useStyles, AuthButton } from "./style";
+import ModalWrapper from "../AuthPage/components/Modal";
 
 export default function AuthencationPage() {
+  const [authorize, authorizeHandler] = useState(false);
   const classes = useStyles();
+
+  const buttonHandler = () => {
+    authorizeHandler(true);
+  };
+
+  const modalClose = (val) => {
+    authorizeHandler(val);
+  };
   return (
     <Container fixed>
+      <ModalWrapper openModalState={authorize} closeHandler={modalClose} />
       <Typography className={classes.imageNew} component="div" />
       <Typography className={classes.buttonStyle} component="div">
-        <AuthButton variant="contained" color="primary">
+        <AuthButton onClick={buttonHandler} variant="contained" color="primary">
           Authenticate Spotify{" "}
         </AuthButton>
       </Typography>
