@@ -1,7 +1,7 @@
 import React from "react";
 
-const DashBoard = React.lazy(() => import("./containers/DashBoard/index"));
-const AuthPage = React.lazy(() => import("./containers/AuthPage/index"));
+const DashBoard = React.lazy(() => import("./components/MusicPlayer"));
+const AuthPage = React.lazy(() => import("./components/MainPage"));
 
 const router = [
   {
